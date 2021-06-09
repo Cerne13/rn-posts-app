@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
 import { Post } from '../components/Post';
 import { DATA } from '../data';
+import { AppHeaderIcon } from '../components/AppHeaderIcon';
 
 export const MainScreen = ({ navigation }) => {
 	const openPostHandler = (post) => {
