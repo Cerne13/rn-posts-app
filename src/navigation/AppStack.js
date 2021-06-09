@@ -28,28 +28,6 @@ const AppStack = () => {
 				component={MainScreen}
 				options={{
 					headerTitle: 'Main page',
-					headerRight: () => (
-						<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-							<Item
-								title='Take photo'
-								iconName='ios-camera'
-								onPress={() =>
-									console.log('Pressed camera icon')
-								}
-							/>
-						</HeaderButtons>
-					),
-					headerLeft: () => (
-						<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-							<Item
-								title='Toggle drawer'
-								iconName='ios-menu'
-								onPress={() =>
-									console.log('Pressed drawer icon')
-								}
-							/>
-						</HeaderButtons>
-					),
 				}}
 			/>
 			<Stack.Screen
@@ -59,7 +37,6 @@ const AppStack = () => {
 					headerTitle:
 						'Post from ' +
 						new Date(route.params.postDate).toLocaleDateString(),
-					headerStyle: { backgroundColor: THEME.MAIN_COLOR },
 				})}
 			/>
 		</Stack.Navigator>
