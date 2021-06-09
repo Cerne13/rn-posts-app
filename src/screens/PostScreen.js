@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	View,
 	Text,
@@ -8,9 +8,32 @@ import {
 	ScrollView,
 	Alert,
 } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { DATA } from '../data';
 import { THEME } from '../theme';
 
-export const PostScreen = ({ route }) => {
+export const PostScreen = ({ route, navigation }) => {
+	const postId = route.params.postId;
+	const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline';
+
+	const post = DATA.find((p) => p.id === postId);
+
+	// is it better with useEffect or useLayoutEffect???
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+					<Item
+						title='Mark as bookmarked'
+						iconName={iconName}
+						onPress={() => console.log('Pressed booked icon')}
+					/>
+				</HeaderButtons>
+			),
+		});
+	}, [navigation]);
+
 	const removeHandler = () => {
 		Alert.alert(
 			'Post deletion',
@@ -28,7 +51,7 @@ export const PostScreen = ({ route }) => {
 
 	return (
 		<ScrollView>
-			<Image source={{ uri: route.params.img }} style={styles.image} />
+			<Image source={{ uri: post.img }} style={styles.image} />
 			<View style={styles.textWrap}>
 				<Text style={styles.title}>{route.params.text}</Text>
 			</View>
@@ -49,5 +72,7 @@ const styles = StyleSheet.create({
 	textWrap: {
 		padding: 10,
 	},
-	title: {},
+	title: {
+		// fontFamily: 'open-regular',
+	},
 });
