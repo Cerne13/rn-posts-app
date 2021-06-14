@@ -1,10 +1,8 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { AppLoading } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
-import { bootstrap } from './src/bootstrap';
-import AppNavigation from './src/navigation/AppNavigation';
+import MainNavigator from './src/navigation/AppNavigation';
 
 export default function App() {
 	// const [isReady, setIsReady] = useState(false);
@@ -21,7 +19,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<AppNavigation />
+			<MainNavigator />
 		</NavigationContainer>
 	);
 }

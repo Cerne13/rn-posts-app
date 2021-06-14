@@ -2,12 +2,15 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 
 import { MainScreen } from '../screens/MainScreen';
 import { PostScreen } from '../screens/PostScreen';
 import { THEME } from '../theme';
 import { BookedScreen } from '../screens/BookedScreen';
+import { AboutScreen } from '../screens/AboutScreen';
+import { CreateScreen } from '../screens/CreateScreen';
 
 const Booked = createStackNavigator();
 
@@ -112,4 +115,16 @@ const AppNavigation = () => {
 	);
 };
 
-export default AppNavigation;
+const Drawer = createDrawerNavigator();
+
+const MainNavigator = () => {
+	return (
+		<Drawer.Navigator>
+			<Drawer.Screen name='Main' component={AppNavigation} />
+			<Drawer.Screen name='About' component={AboutScreen} />
+			<Drawer.Screen name='Create' component={CreateScreen} />
+		</Drawer.Navigator>
+	);
+};
+
+export default MainNavigator;
