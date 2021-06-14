@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { AppLoading } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 import { bootstrap } from './src/bootstrap';
-import AppStack from './src/navigation/AppStack';
+import AppNavigation from './src/navigation/AppNavigation';
 
 export default function App() {
 	// const [isReady, setIsReady] = useState(false);
@@ -21,7 +21,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<AppStack />
+			<AppNavigation />
 		</NavigationContainer>
 	);
 }

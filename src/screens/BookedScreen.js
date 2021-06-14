@@ -1,23 +1,15 @@
 import React from 'react';
+
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useEffect } from 'react/cjs/react.development';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 
-import { DATA } from '../data';
 import { PostList } from '../components/PostList';
+import { DATA } from '../data';
 
-export const MainScreen = ({ navigation }) => {
+export const BookedScreen = ({ navigation }) => {
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => (
-				<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-					<Item
-						title='Take photo'
-						iconName='ios-camera'
-						onPress={() => console.log('Pressed camera icon')}
-					/>
-				</HeaderButtons>
-			),
 			headerLeft: () => (
 				<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
 					<Item
@@ -40,5 +32,10 @@ export const MainScreen = ({ navigation }) => {
 		});
 	};
 
-	return <PostList data={DATA} onOpen={openPostHandler} />;
+	return (
+		<PostList
+			data={DATA.filter((post) => post.booked)}
+			onOpen={openPostHandler}
+		/>
+	);
 };
