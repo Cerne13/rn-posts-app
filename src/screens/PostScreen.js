@@ -13,9 +13,8 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { LogBox } from 'react-native';
 
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { DATA } from '../data';
 import { THEME } from '../theme';
-import { toggleBooked } from '../store/actions/postActions';
+import { removePost, toggleBooked } from '../store/actions/postActions';
 
 LogBox.ignoreLogs([
 	'Non-serializable values were found in the navigation state',
@@ -27,7 +26,9 @@ export const PostScreen = ({ route, navigation }) => {
 	const postId = route.params.postId;
 	const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline';
 
-	const post = DATA.find((p) => p.id === postId);
+	const post = useSelector((state) =>
+		state.post.allPosts.find((post) => post.id === postId)
+	);
 
 	// is it better with useEffect or useLayoutEffect???
 	useEffect(() => {
@@ -70,11 +71,22 @@ export const PostScreen = ({ route, navigation }) => {
 					text: 'Cancel',
 					style: 'cancel',
 				},
-				{ text: 'OK', style: 'destructive', onPress: () => {} },
+				{
+					text: 'OK',
+					style: 'destructive',
+					onPressr() {
+						navigation.navigate('Main');
+						dispatch(removePost(postId));
+					},
+				},
 			],
 			{ cancelable: false }
 		);
 	};
+
+	if (!post) {
+		return null;
+	}
 
 	return (
 		<ScrollView>
