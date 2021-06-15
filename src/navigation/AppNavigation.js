@@ -4,7 +4,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabStack from './TabStack';
 import AboutStack from './AboutStack';
 import CreateStack from './CreateStack';
-import { Ionicons } from '@expo/vector-icons';
 import { THEME } from '../theme';
 
 const Drawer = createDrawerNavigator();

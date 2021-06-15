@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useEffect } from 'react/cjs/react.development';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { DATA } from '../data';
+import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { PostList } from '../components/PostList';
+import { loadPosts } from '../store/actions/postActions';
 
 export const MainScreen = ({ navigation }) => {
 	useEffect(() => {
@@ -31,6 +31,14 @@ export const MainScreen = ({ navigation }) => {
 		});
 	}, [navigation]);
 
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(loadPosts());
+	}, [dispatch]);
+
+	const allPosts = useSelector((state) => state.post.allPosts);
+
 	const openPostHandler = (post) => {
 		navigation.navigate('Post', {
 			postId: post.id,
@@ -41,5 +49,5 @@ export const MainScreen = ({ navigation }) => {
 		});
 	};
 
-	return <PostList data={DATA} onOpen={openPostHandler} />;
+	return <PostList data={allPosts} onOpen={openPostHandler} />;
 };

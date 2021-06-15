@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	View,
 	Text,
@@ -9,11 +10,20 @@ import {
 	Alert,
 } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { LogBox } from 'react-native';
+
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { DATA } from '../data';
 import { THEME } from '../theme';
+import { toggleBooked } from '../store/actions/postActions';
+
+LogBox.ignoreLogs([
+	'Non-serializable values were found in the navigation state',
+]);
 
 export const PostScreen = ({ route, navigation }) => {
+	const dispatch = useDispatch();
+
 	const postId = route.params.postId;
 	const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline';
 
@@ -27,12 +37,29 @@ export const PostScreen = ({ route, navigation }) => {
 					<Item
 						title='Mark as bookmarked'
 						iconName={iconName}
-						onPress={() => console.log('Pressed booked icon')}
+						onPress={toggleHandler}
 					/>
 				</HeaderButtons>
 			),
 		});
 	}, [navigation]);
+
+	const booked = useSelector((state) =>
+		state.post.bookedPosts.some((post) => post.id === postId)
+	);
+
+	useEffect(() => {
+		navigation.setParams({ booked });
+	}, [booked]);
+
+	const toggleHandler = useCallback(() => {
+		console.log(postId);
+		dispatch(toggleBooked(postId));
+	}, [dispatch, postId]);
+
+	useEffect(() => {
+		navigation.setParams({ toggleHandler });
+	}, [toggleHandler]);
 
 	const removeHandler = () => {
 		Alert.alert(
@@ -71,8 +98,5 @@ const styles = StyleSheet.create({
 	},
 	textWrap: {
 		padding: 10,
-	},
-	title: {
-		// fontFamily: 'open-regular',
 	},
 });

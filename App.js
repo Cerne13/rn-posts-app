@@ -1,8 +1,10 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import { Provider } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigation from './src/navigation/AppNavigation';
+import store from './src/store';
 
 export default function App() {
 	// const [isReady, setIsReady] = useState(false);
@@ -18,8 +20,10 @@ export default function App() {
 	// }
 
 	return (
-		<NavigationContainer>
-			<AppNavigation />
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer>
+				<AppNavigation />
+			</NavigationContainer>
+		</Provider>
 	);
 }
