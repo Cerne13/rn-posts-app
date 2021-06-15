@@ -15,7 +15,11 @@ const CreateStack = () => {
 				headerTintColor: 'white',
 			}}
 		>
-			<Stack.Screen name='Create' component={CreateScreen} />
+			<Stack.Screen
+				name='Create'
+				component={CreateScreen}
+				options={{ headerTitle: 'Create post' }}
+			/>
 		</Stack.Navigator>
 	);
 };

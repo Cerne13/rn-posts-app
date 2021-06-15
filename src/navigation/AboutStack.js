@@ -15,7 +15,11 @@ const AboutStack = () => {
 				headerTintColor: 'white',
 			}}
 		>
-			<Stack.Screen name='About' component={AboutScreen} />
+			<Stack.Screen
+				name='About'
+				component={AboutScreen}
+				options={{ headerTitle: 'About App' }}
+			/>
 		</Stack.Navigator>
 	);
 };

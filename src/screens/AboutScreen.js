@@ -20,7 +20,10 @@ export const AboutScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.center}>
-			<Text>About Screen</Text>
+			<Text>Simple prototype for a personal notes app</Text>
+			<Text>
+				Version <Text style={styles.version}>0.5.1</Text>
+			</Text>
 		</View>
 	);
 };
@@ -30,5 +33,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	version: {
+		fontWeight: 'bold',
+		color: '#8b0000',
 	},
 });

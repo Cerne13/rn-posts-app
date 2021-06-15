@@ -14,7 +14,8 @@ export const MainScreen = ({ navigation }) => {
 					<Item
 						title='Take photo'
 						iconName='ios-camera'
-						onPress={() => console.log('Pressed camera icon')}
+						onPress={() => navigation.push('Create')}
+						//TODO: fix later
 					/>
 				</HeaderButtons>
 			),
