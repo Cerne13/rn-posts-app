@@ -54,9 +54,8 @@ export const PostScreen = ({ route, navigation }) => {
 	}, [booked]);
 
 	const toggleHandler = useCallback(() => {
-		console.log(postId);
-		dispatch(toggleBooked(postId));
-	}, [dispatch, postId]);
+		dispatch(toggleBooked(post));
+	}, [dispatch]);
 
 	useEffect(() => {
 		navigation.setParams({ toggleHandler });
@@ -74,7 +73,7 @@ export const PostScreen = ({ route, navigation }) => {
 				{
 					text: 'OK',
 					style: 'destructive',
-					onPressr() {
+					onPress() {
 						navigation.navigate('Main');
 						dispatch(removePost(postId));
 					},
