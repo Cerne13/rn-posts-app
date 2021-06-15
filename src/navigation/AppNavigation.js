@@ -9,7 +9,7 @@ import { THEME } from '../theme';
 
 const Drawer = createDrawerNavigator();
 
-const MainNavigator = () => {
+const AppNavigation = () => {
 	return (
 		<Drawer.Navigator
 			drawerContentOptions={{
@@ -41,4 +41,4 @@ const MainNavigator = () => {
 	);
 };
 
-export default MainNavigator;
+export default AppNavigation;

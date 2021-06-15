@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import MainNavigator from './src/navigation/AppNavigation';
+import AppNavigation from './src/navigation/AppNavigation';
 
 export default function App() {
 	// const [isReady, setIsReady] = useState(false);
@@ -19,7 +19,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<MainNavigator />
+			<AppNavigation />
 		</NavigationContainer>
 	);
 }
