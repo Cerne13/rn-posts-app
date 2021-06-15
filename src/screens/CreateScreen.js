@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
 	View,
 	Text,
@@ -14,12 +14,15 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch } from 'react-redux';
 
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { PhotoPicker } from '../components/PhotoPicker';
 import { addPost } from '../store/actions/postActions';
 import { THEME } from '../theme';
 
 export const CreateScreen = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const [text, setText] = useState('');
+
+	const imgRef = useRef();
 
 	useEffect(() => {
 		navigation.setOptions({
@@ -35,18 +38,19 @@ export const CreateScreen = ({ navigation }) => {
 		});
 	}, [navigation]);
 
-	const img =
-		'https://cdn.londonandpartners.com/visit/general-london/areas/river/76709-640x360-houses-of-parliament-and-london-eye-on-thames-from-above-640.jpg';
-
 	const saveHandler = () => {
 		const post = {
 			date: new Date().toJSON(),
 			text,
-			img,
+			img: imgRef.current,
 			booked: false,
 		};
 		dispatch(addPost(post));
 		navigation.navigate('Main');
+	};
+
+	const photoPickHandler = (uri) => {
+		imgRef.current = uri;
 	};
 
 	return (
@@ -63,20 +67,12 @@ export const CreateScreen = ({ navigation }) => {
 						onChangeText={setText}
 						multiline
 					/>
-					<Image
-						style={{
-							width: '100%',
-							height: 200,
-							marginVertical: 20,
-						}}
-						source={{
-							uri: img,
-						}}
-					/>
+					<PhotoPicker onPick={photoPickHandler} />
 					<Button
 						title='Create post'
 						color={THEME.MAIN_COLOR}
 						onPress={saveHandler}
+						disabled={!text}
 					/>
 				</View>
 			</TouchableWithoutFeedback>
