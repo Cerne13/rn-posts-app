@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { PostList } from '../components/PostList';
 import { loadPosts } from '../store/actions/postActions';
+import { THEME } from '../theme';
 
 export const MainScreen = ({ navigation }) => {
 	useEffect(() => {
@@ -44,7 +45,7 @@ export const MainScreen = ({ navigation }) => {
 	if (loading) {
 		return (
 			<View style={styles.center}>
-				<ActivityIndicator />
+				<ActivityIndicator color={THEME.MAIN_COLOR}/>
 			</View>
 		);
 	}
