@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -38,6 +39,15 @@ export const MainScreen = ({ navigation }) => {
 	}, [dispatch]);
 
 	const allPosts = useSelector((state) => state.post.allPosts);
+	const loading = useSelector((state) => state.post.loading);
+
+	if (loading) {
+		return (
+			<View style={styles.center}>
+				<ActivityIndicator />
+			</View>
+		);
+	}
 
 	const openPostHandler = (post) => {
 		navigation.navigate('Post', {
@@ -51,3 +61,11 @@ export const MainScreen = ({ navigation }) => {
 
 	return <PostList data={allPosts} onOpen={openPostHandler} />;
 };
+
+const styles = StyleSheet.create({
+	center: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+});
